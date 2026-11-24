@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Calculator</title>
+
+    <style>
+        /* Page */
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        /* Calculator Box */
+        .calculator {
+            width: 300px;
+            padding: 20px;
+
+            background-color: #0d00fff5;
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(9, 153, 219, 0.4);
+        }
+
+        /* Display */
+        #display {
+            width: 100%;
+            height: 65px;
+
+            margin-bottom: 15px;
+            padding: 10px;
+
+            box-sizing: border-box;
+
+            border: none;
+            border-radius: 10px;
+
+            background-color: #f5f5f5;
+
+            font-size: 28px;
+            text-align: right;
+
+            color: #222;
+        }
+
+        /* Buttons Area */
+        .buttons {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 10px;
+        }
+
+        /* All Buttons */
+        button {
+            height: 55px;
+
+            border: none;
+            border-radius: 12px;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        /* Number Buttons */
+        .number {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .number:hover {
+            background-color: #2980b9;
+        }
+
+        /* Operator Buttons */
+        .operator {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .operator:hover {
+            background-color: #d68910;
+        }
+
+        /* Clear Button */
+        .clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .clear:hover {
+            background-color: #c0392b;
+        }
+
+        /* Delete Button */
+        .delete {
+            background-color: #9b59b6;
+            color: white;
+        }
+
+        .delete:hover {
+            background-color: #8e44ad;
+        }
+
+        /* Equal Button */
+        .equal {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .equal:hover {
+            background-color: #27ae60;
+        }
+
+        /* Zero Button */
+        .zero {
+            grid-column: span 2;
+
+            background-color: #3498db;
+            color: white;
+        }
+
+        .zero:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <!-- Display -->
+        <input type="text" id="display" readonly>
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <!-- First Row -->
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="delete" onclick="deleteLast()">⌫</button>
+            <button class="operator" onclick="addValue('%')">%</button>
+            <button class="operator" onclick="addValue('/')">÷</button>
+
+            <!-- Second Row -->
+            <button class="number" onclick="addValue('7')">7</button>
+            <button class="number" onclick="addValue('8')">8</button>
+            <button class="number" onclick="addValue('9')">9</button>
+            <button class="operator" onclick="addValue('*')">×</button>
+
+            <!-- Third Row -->
+            <button class="number" onclick="addValue('4')">4</button>
+            <button class="number" onclick="addValue('5')">5</button>
+            <button class="number" onclick="addValue('6')">6</button>
+            <button class="operator" onclick="addValue('-')">−</button>
+
+            <!-- Fourth Row -->
+            <button class="number" onclick="addValue('1')">1</button>
+            <button class="number" onclick="addValue('2')">2</button>
+            <button class="number" onclick="addValue('3')">3</button>
+            <button class="operator" onclick="addValue('+')">+</button>
+
+            <!-- Fifth Row -->
+            <button class="number zero" onclick="addValue('0')">0</button>
+            <button class="number" onclick="addValue('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Add number or operator
+        function addValue(value) {
+            document.getElementById("display").value += value;
+        }
+
+
+        // Clear calculator
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+
+        // Delete last character
+        function deleteLast() {
+            let display = document.getElementById("display");
+
+            display.value = display.value.slice(0, -1);
+        }
+
+
+        // Calculate result
+        function calculate() {
+
+            let display = document.getElementById("display");
+
+            try {
+                display.value = eval(display.value);
+            }
+
+            catch {
+                display.value = "Error";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
